@@ -5,6 +5,8 @@ import UserService from "./user/service";
 import { DatabaseManager } from "./database/model";
 import { AuthService } from "./auth/service";
 import { AuthController } from "./auth/controller";
+import { ChallengeService } from "./challenge/service";
+import { ChallengeController } from "./challenge/controller";
 
 // Database Service
 const prisma = new PrismaClient();
@@ -16,12 +18,17 @@ const dbManager = new DatabaseManager(prisma);
 const userService = new UserService(dbManager);
 const userController = new UserController(userService);
 
+// Challenges
+const challengeService = new ChallengeService(dbManager);
+const challengeController = new ChallengeController(challengeService);
+
 // Auth
 const authService = new AuthService(dbManager);
 const authController = new AuthController(authService);
 
 const app = new Elysia()
   .use(userController.userController)
+  .use(challengeController.challengeController)
   .use(authController.authController)
   .onError(({ code }) => {
     if (code === "NOT_FOUND") return "Route not supported.";

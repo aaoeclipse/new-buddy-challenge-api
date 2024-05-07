@@ -1,5 +1,6 @@
 import { PrismaClient, User } from "@prisma/client";
 import { error } from "elysia";
+import { CreateChallengeDTO } from "../challenge/model";
 
 export class DatabaseManager {
   connection: PrismaClient;
@@ -52,6 +53,46 @@ export class DatabaseManager {
     return await this.connection.user.findFirst({
       where: {
         email: email,
+      },
+    });
+  }
+
+  public async get_challenges_by_user(userId: number) {
+    return await this.connection.challenge.findMany({
+      where: {
+        ownerId: userId,
+      },
+    });
+  }
+
+  public create_challenge(userId: number, challenge: CreateChallengeDTO) {
+    return this.connection.challenge.create({
+      data: {
+        ownerId: userId,
+        ...challenge,
+      },
+    });
+  }
+
+  public get_challenge_by_id(challengeId: number) {
+    return this.connection.challenge.findFirst({
+      where: {
+        id: challengeId,
+      },
+    });
+  }
+
+  public invite_to_challenge(challengeId: number, userIds: number[]) {
+    return this.connection.challenge.update({
+      where: {
+        id: challengeId,
+      },
+      data: {
+        people: {
+          createMany: {
+            data: userIds.map((userId) => ({ userId })),
+          },
+        },
       },
     });
   }
