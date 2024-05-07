@@ -4,14 +4,15 @@ import jwt from "@elysiajs/jwt";
 import { apiMiddleware } from "../auth/middleware/authMiddleware";
 
 /**
- * TODO:
+ // TODO Challenge:
  * - [ ✓ ] Create Challenge
- * - [ ✓ ] Get Challenge
  * - [ ✓ ] Get Challenges owned by the User
  * - [   ] Get All Challenges of User
  * - [ ✓ ] Get Challenge by Id
- * - [ ~ ] Invite to Challenge
  * - [   ] Delete Challenge
+ * - [ ~ ] Invite to Challenge
+ * - [ ✓ ]      Invite to Challenge
+ * - [   ]      Don't allow self invite
  */
 
 export class ChallengeController {
@@ -58,7 +59,7 @@ export class ChallengeController {
       {
         beforeHandle: apiMiddleware,
         params: t.Object({
-          challenge_id: t.Number(),
+          challenge_id: t.Numeric(),
         }),
       }
     )

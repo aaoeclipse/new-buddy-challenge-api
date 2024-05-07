@@ -31,8 +31,9 @@ model Measurement {
   bodyFatPer  Float?
   muscleMass  Float?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @default(now())
+  MeasurementOnChallenge MeasurementOnChallenge[]
 }
 
 model User {
@@ -97,16 +98,34 @@ model Challenge {
 
   owner   User @relation(fields: [ownerId], references: [id])
   ownerId Int
+
+  createdAt              DateTime                 @default(now())
+  deadLine               DateTime?
+  MeasurementOnChallenge MeasurementOnChallenge[]
 }
 
 model ChallengeOnUser {
-  user        User      @relation(fields: [userId], references: [id])
-  userId      Int
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
   challenge   Challenge @relation(fields: [challengeId], references: [id])
   challengeId Int
-  assignedAt  DateTime  @default(now())
+
+  assignedAt DateTime @default(now())
 
   @@id([userId, challengeId])
+}
+
+model MeasurementOnChallenge {
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+  challengeId Int
+
+  measurement   Measurement @relation(fields: [measurementId], references: [id])
+  measurementId Int
+
+  assignedAt DateTime @default(now())
+
+  @@id([challengeId, measurementId])
 }
 
 model Exercise {

@@ -31,6 +31,11 @@ export class DatabaseManager {
       select: {
         id: true,
         email: true,
+        friendOf: true,
+        friends: true,
+        challenges: true,
+        profile: true,
+        sentFriendRequests: true,
         password: false,
       },
     });
@@ -93,6 +98,118 @@ export class DatabaseManager {
             data: userIds.map((userId) => ({ userId })),
           },
         },
+      },
+    });
+  }
+
+  public get_friends_from_userid(userId: number) {
+    return this.connection.user.findMany({
+      where: {
+        id: userId,
+      },
+      select: {
+        friends: {
+          select: {
+            friend: {
+              select: {
+                id: true,
+                email: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  public send_friend_request(userId: number, friendId: number) {
+    return this.connection.friendRequest.create({
+      data: {
+        senderId: userId,
+        receiverId: friendId,
+      },
+    });
+  }
+
+  public send_friends_request(userId: number, friendId: number[]) {
+    return this.connection.friendRequest.createMany({
+      data: friendId.map((friend) => ({
+        senderId: userId,
+        receiverId: friend,
+      })),
+    });
+  }
+
+  public get_friend_requests(userId: number) {
+    return this.connection.friendRequest.findMany({
+      where: {
+        receiverId: userId,
+      },
+    });
+  }
+
+  public add_friends(userId: number, friendIds: number[]) {
+    return this.connection.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        friends: {
+          createMany: {
+            data: friendIds.map((friendId) => ({ friendId })),
+          },
+        },
+      },
+    });
+  }
+
+  public async accept_friend_request(requestId: number) {
+    const request = await this.connection.friendRequest.update({
+      where: {
+        id: requestId,
+      },
+      data: {
+        status: "ACCEPTED",
+      },
+    });
+
+    await this.connection.user.update({
+      where: {
+        id: request.receiverId,
+      },
+      data: {
+        friends: {
+          create: {
+            friendId: request.senderId,
+          },
+        },
+      },
+    });
+
+    await this.connection.user.update({
+      where: {
+        id: request.senderId,
+      },
+      data: {
+        friends: {
+          create: {
+            friendId: request.receiverId,
+          },
+        },
+      },
+    });
+
+    return this.connection.friendRequest.delete({
+      where: {
+        id: requestId,
+      },
+    });
+  }
+
+  public get_friend_request(requestId: number) {
+    return this.connection.friendRequest.findFirst({
+      where: {
+        id: requestId,
       },
     });
   }

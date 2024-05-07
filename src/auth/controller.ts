@@ -2,6 +2,17 @@ import { Elysia, t } from "elysia";
 import { AuthService } from "./service";
 import jwt from "@elysiajs/jwt";
 
+/**
+ // TODO Auth
+ * - [ ✓ ] Login
+ * - [ ✓ ] Log out
+ * - [ ✓ ] Register
+ * - [ ✓ ] Middleware to check if user is logged in
+ * - [   ] Verify Email
+ * - [   ] Forgot Password
+ * - [   ] Reset Password
+ */
+
 export class AuthController {
   service: AuthService;
 

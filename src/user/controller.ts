@@ -1,6 +1,14 @@
 import { Elysia, t } from "elysia";
 import UserService from "./service";
 
+/**
+ // TODO Users
+ * - [ ✓ ] Get Users
+ * - [ ✓ ] Get User by id
+ * - [ ✓ ] Create User
+ * - [   ] Delete User
+ */
+
 class UserController {
   service: UserService;
 
@@ -51,10 +59,7 @@ class UserController {
           id: t.Numeric(),
         }),
       }
-    )
-    .post("/friend", async ({ body }: { body: any }) => {
-      return body;
-    });
+    );
 }
 
 export default UserController;
