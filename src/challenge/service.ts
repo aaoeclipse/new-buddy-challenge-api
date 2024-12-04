@@ -20,12 +20,33 @@ export class ChallengeService {
     return this.database.get_challenge_by_id(challengeId);
   }
 
+  public get_latest_challenge_by_user(userId: number) {
+    return this.database.get_latest_challenge_by_user(userId);
+  }
+
   public invite_to_challenge(
     challenge: number,
     userId: number,
     users: number[]
   ) {
-    // check if user owns the challenge
+    if (users.includes(userId)) {
+      throw new Error("User cannot invite himself");
+    }
+    // TODO: check if user owns the challenge
     return this.database.invite_to_challenge(challenge, users);
   }
+
+  public get_pending_challenges(userId: number) {
+    return this.database.get_pending_challenges(userId);
+  }
+
+  public accepted_challenge_invite(
+    userId: number,
+    challengeId: number,
+    accept: boolean
+  ) {
+    return this.database.accept_challenge(userId, challengeId, accept);
+  }
+
 }
+

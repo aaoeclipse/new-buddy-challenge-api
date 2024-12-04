@@ -1,0 +1,67 @@
+GET http://localhost:3000/user HTTP/1.1
+
+###
+
+POST http://localhost:3000/register HTTP/1.1
+content-type: application/json
+
+{
+    "email": "santiago.paiz+3@gmail.com",
+    "password": "secretpassword"
+}
+
+###
+
+POST http://192.168.1.11:3000/login HTTP/1.1
+content-type: application/json
+
+{
+	"email": "santiago.paiz+2@gmail.com",
+	"password": "secretpassword"
+}
+
+### Challenges
+
+# Get all challenges
+GET http://localhost:3000/challenge HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoic2FudGlhZ28ucGFpeiszQGdtYWlsLmNvbSJ9.tCnnHEfrrLxec8DbYly7NE6SL2PM3pYsTFQnmiwil3U
+
+### Get all specific challenge
+GET http://localhost:3000/challenge/1 HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoic2FudGlhZ28ucGFpeiszQGdtYWlsLmNvbSJ9.tCnnHEfrrLxec8DbYly7NE6SL2PM3pYsTFQnmiwil3U
+
+### Create Challenge
+POST http://localhost:3000/challenge/new HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoic2FudGlhZ28ucGFpeiszQGdtYWlsLmNvbSJ9.tCnnHEfrrLxec8DbYly7NE6SL2PM3pYsTFQnmiwil3U
+content-type: application/json
+
+{
+   "name": "My First Challenge" ,
+   "goal": "lose weight"
+}
+
+### Invite to challenge
+POST http://localhost:3000/challenge/1/invite HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoic2FudGlhZ28ucGFpeiszQGdtYWlsLmNvbSJ9.tCnnHEfrrLxec8DbYly7NE6SL2PM3pYsTFQnmiwil3U
+content-type: application/json
+
+[
+    1,2
+]
+
+### GET Pending Challenge
+
+GET http://localhost:3000/challenge/pending HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoic2FudGlhZ28ucGFpeisyQGdtYWlsLmNvbSJ9.KzpiXUfjhmqTV--62OfrdzHylLhCZZuObjvHlRiw1Co
+content-type: application/json
+
+### POST Accept Challenge
+
+POST http://localhost:3000/challenge/invite HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoic2FudGlhZ28ucGFpeisyQGdtYWlsLmNvbSJ9.KzpiXUfjhmqTV--62OfrdzHylLhCZZuObjvHlRiw1Co
+content-type: application/json
+
+{
+    "challengeId": 1,
+    "accept": true
+}

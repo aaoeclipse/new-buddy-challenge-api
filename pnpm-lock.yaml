@@ -1,0 +1,226 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@elysiajs/cookie':
+        specifier: ^0.8.0
+        version: 0.8.0(elysia@1.1.6(@sinclair/typebox@0.27.8)(typescript@5.5.4))
+      '@elysiajs/jwt':
+        specifier: ^1.0.2
+        version: 1.1.0(elysia@1.1.6(@sinclair/typebox@0.27.8)(typescript@5.5.4))
+      '@prisma/client':
+        specifier: ^5.13.0
+        version: 5.18.0(prisma@5.18.0)
+      elysia:
+        specifier: 1.1.6
+        version: 1.1.6(@sinclair/typebox@0.27.8)(typescript@5.5.4)
+    devDependencies:
+      bun-types:
+        specifier: latest
+        version: 1.1.25
+      prisma:
+        specifier: ^5.13.0
+        version: 5.18.0
+
+packages:
+
+  '@elysiajs/cookie@0.8.0':
+    resolution: {integrity: sha512-CUtDwdYEoN0BcQ3SgZrB4x5nrbM4ih0sMhMuKKdMlEvqLtmRQDfq9KBCrMJW6L/Q0tPH0JLRqwjEbVb6rJufCw==}
+    peerDependencies:
+      elysia: '>= 0.8.0'
+
+  '@elysiajs/jwt@1.1.0':
+    resolution: {integrity: sha512-0UXNBYdaWtGq10RPupEP9SLtwDqNuyNdUcYov0dJLoIB2H4LoTWsZLcFstEFyKZHHP0QCdL9s/b4U6iy6gdg/g==}
+    peerDependencies:
+      elysia: '>= 1.1.0'
+
+  '@prisma/client@5.18.0':
+    resolution: {integrity: sha512-BWivkLh+af1kqC89zCJYkHsRcyWsM8/JHpsDMM76DjP3ZdEquJhXa4IeX+HkWPnwJ5FanxEJFZZDTWiDs/Kvyw==}
+    engines: {node: '>=16.13'}
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+
+  '@prisma/debug@5.18.0':
+    resolution: {integrity: sha512-f+ZvpTLidSo3LMJxQPVgAxdAjzv5OpzAo/eF8qZqbwvgi2F5cTOI9XCpdRzJYA0iGfajjwjOKKrVq64vkxEfUw==}
+
+  '@prisma/engines-version@5.18.0-25.4c784e32044a8a016d99474bd02a3b6123742169':
+    resolution: {integrity: sha512-a/+LpJj8vYU3nmtkg+N3X51ddbt35yYrRe8wqHTJtYQt7l1f8kjIBcCs6sHJvodW/EK5XGvboOiwm47fmNrbgg==}
+
+  '@prisma/engines@5.18.0':
+    resolution: {integrity: sha512-ofmpGLeJ2q2P0wa/XaEgTnX/IsLnvSp/gZts0zjgLNdBhfuj2lowOOPmDcfKljLQUXMvAek3lw5T01kHmCG8rg==}
+
+  '@prisma/fetch-engine@5.18.0':
+    resolution: {integrity: sha512-I/3u0x2n31rGaAuBRx2YK4eB7R/1zCuayo2DGwSpGyrJWsZesrV7QVw7ND0/Suxeo/vLkJ5OwuBqHoCxvTHpOg==}
+
+  '@prisma/get-platform@5.18.0':
+    resolution: {integrity: sha512-Tk+m7+uhqcKDgnMnFN0lRiH7Ewea0OEsZZs9pqXa7i3+7svS3FSCqDBCaM9x5fmhhkufiG0BtunJVDka+46DlA==}
+
+  '@sinclair/typebox@0.27.8':
+    resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
+
+  '@types/cookie-signature@1.1.2':
+    resolution: {integrity: sha512-2OhrZV2LVnUAXklUFwuYUTokalh/dUb8rqt70OW6ByMSxYpauPZ+kfNLknX3aJyjY5iu8i3cUyoLZP9Fn37tTg==}
+
+  '@types/cookie@0.5.4':
+    resolution: {integrity: sha512-7z/eR6O859gyWIAjuvBWFzNURmf2oPBmJlfVWkwehU5nzIyjwBsTh7WMmEEV4JFnHuQ3ex4oyTvfKzcyJVDBNA==}
+
+  '@types/node@20.12.14':
+    resolution: {integrity: sha512-scnD59RpYD91xngrQQLGkE+6UrHUPzeKZWhhjBSa3HSkwjbQc38+q3RoIVEwxQGRw3M+j5hpNAM+lgV3cVormg==}
+
+  '@types/node@22.5.0':
+    resolution: {integrity: sha512-DkFrJOe+rfdHTqqMg0bSNlGlQ85hSoh2TPzZyhHsXnMtligRWpxUySiyw8FY14ITt24HVCiQPWxS3KO/QlGmWg==}
+
+  '@types/ws@8.5.12':
+    resolution: {integrity: sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==}
+
+  bun-types@1.1.25:
+    resolution: {integrity: sha512-WpRb8/N3S5IE8UYdIn39+0Is1XzxsC78+MCe5cIdaer0lfFs6+DREtQH9TM6KJNKTxBYDvbx81RwbvxS5+CkVQ==}
+
+  cookie-signature@1.2.1:
+    resolution: {integrity: sha512-78KWk9T26NhzXtuL26cIJ8/qNHANyJ/ZYrmEXFzUmhZdjpBv+DlWlOANRTGBt48YcyslsLrj0bMLFTmXvLRCOw==}
+    engines: {node: '>=6.6.0'}
+
+  cookie@0.5.0:
+    resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
+    engines: {node: '>= 0.6'}
+
+  cookie@0.6.0:
+    resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
+    engines: {node: '>= 0.6'}
+
+  elysia@1.1.6:
+    resolution: {integrity: sha512-nj3m1EU+KK2171yhHKm4MyVf5tYAOvq0uwjQ57q40r+fNxxPr8YEahE9PoJngZrrs6ctmKYCuoKSr96bfnSZAQ==}
+    peerDependencies:
+      '@sinclair/typebox': '>= 0.32.0'
+      openapi-types: '>= 12.0.0'
+      typescript: '>= 5.0.0'
+    peerDependenciesMeta:
+      openapi-types:
+        optional: true
+      typescript:
+        optional: true
+
+  fast-decode-uri-component@1.0.1:
+    resolution: {integrity: sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg==}
+
+  jose@4.15.9:
+    resolution: {integrity: sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA==}
+
+  prisma@5.18.0:
+    resolution: {integrity: sha512-+TrSIxZsh64OPOmaSgVPH7ALL9dfU0jceYaMJXsNrTkFHO7/3RANi5K2ZiPB1De9+KDxCWn7jvRq8y8pvk+o9g==}
+    engines: {node: '>=16.13'}
+    hasBin: true
+
+  typescript@5.5.4:
+    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+  undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
+  undici-types@6.19.8:
+    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
+
+snapshots:
+
+  '@elysiajs/cookie@0.8.0(elysia@1.1.6(@sinclair/typebox@0.27.8)(typescript@5.5.4))':
+    dependencies:
+      '@types/cookie': 0.5.4
+      '@types/cookie-signature': 1.1.2
+      cookie: 0.5.0
+      cookie-signature: 1.2.1
+      elysia: 1.1.6(@sinclair/typebox@0.27.8)(typescript@5.5.4)
+
+  '@elysiajs/jwt@1.1.0(elysia@1.1.6(@sinclair/typebox@0.27.8)(typescript@5.5.4))':
+    dependencies:
+      elysia: 1.1.6(@sinclair/typebox@0.27.8)(typescript@5.5.4)
+      jose: 4.15.9
+
+  '@prisma/client@5.18.0(prisma@5.18.0)':
+    optionalDependencies:
+      prisma: 5.18.0
+
+  '@prisma/debug@5.18.0': {}
+
+  '@prisma/engines-version@5.18.0-25.4c784e32044a8a016d99474bd02a3b6123742169': {}
+
+  '@prisma/engines@5.18.0':
+    dependencies:
+      '@prisma/debug': 5.18.0
+      '@prisma/engines-version': 5.18.0-25.4c784e32044a8a016d99474bd02a3b6123742169
+      '@prisma/fetch-engine': 5.18.0
+      '@prisma/get-platform': 5.18.0
+
+  '@prisma/fetch-engine@5.18.0':
+    dependencies:
+      '@prisma/debug': 5.18.0
+      '@prisma/engines-version': 5.18.0-25.4c784e32044a8a016d99474bd02a3b6123742169
+      '@prisma/get-platform': 5.18.0
+
+  '@prisma/get-platform@5.18.0':
+    dependencies:
+      '@prisma/debug': 5.18.0
+
+  '@sinclair/typebox@0.27.8': {}
+
+  '@types/cookie-signature@1.1.2':
+    dependencies:
+      '@types/node': 22.5.0
+
+  '@types/cookie@0.5.4': {}
+
+  '@types/node@20.12.14':
+    dependencies:
+      undici-types: 5.26.5
+
+  '@types/node@22.5.0':
+    dependencies:
+      undici-types: 6.19.8
+
+  '@types/ws@8.5.12':
+    dependencies:
+      '@types/node': 20.12.14
+
+  bun-types@1.1.25:
+    dependencies:
+      '@types/node': 20.12.14
+      '@types/ws': 8.5.12
+
+  cookie-signature@1.2.1: {}
+
+  cookie@0.5.0: {}
+
+  cookie@0.6.0: {}
+
+  elysia@1.1.6(@sinclair/typebox@0.27.8)(typescript@5.5.4):
+    dependencies:
+      '@sinclair/typebox': 0.27.8
+      cookie: 0.6.0
+      fast-decode-uri-component: 1.0.1
+    optionalDependencies:
+      typescript: 5.5.4
+
+  fast-decode-uri-component@1.0.1: {}
+
+  jose@4.15.9: {}
+
+  prisma@5.18.0:
+    dependencies:
+      '@prisma/engines': 5.18.0
+
+  typescript@5.5.4:
+    optional: true
+
+  undici-types@5.26.5: {}
+
+  undici-types@6.19.8: {}

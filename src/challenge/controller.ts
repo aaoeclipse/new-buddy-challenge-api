@@ -7,12 +7,14 @@ import { apiMiddleware } from "../auth/middleware/authMiddleware";
  // TODO Challenge:
  * - [ ✓ ] Create Challenge
  * - [ ✓ ] Get Challenges owned by the User
- * - [   ] Get All Challenges of User
+ * - [ ✓ ] Get All Challenges of User
+ * - [ ✓ ] Get Latest Challenges of User
  * - [ ✓ ] Get Challenge by Id
  * - [   ] Delete Challenge
- * - [ ~ ] Invite to Challenge
+ * - [   ] Update Challenge
+ * - [ ✓ ] Invite to Challenge
  * - [ ✓ ]      Invite to Challenge
- * - [   ]      Don't allow self invite
+ * - [ ✓ ]      Don't allow self invite
  */
 
 export class ChallengeController {
@@ -47,13 +49,23 @@ export class ChallengeController {
     .get(
       "/challenge",
       ({ userId }) => {
+        console.debug("🥊 Get user challanges");
         return this.service.get_all_challenges_of_user(userId);
+      },
+      { beforeHandle: apiMiddleware }
+    )
+    .get("/challenge/latest",
+      ({ userId }) => {
+        console.debug("🥊 Get latest challenge by user");
+        return this.service.get_latest_challenge_by_user(userId);
       },
       { beforeHandle: apiMiddleware }
     )
     .get(
       "/challenge/:challenge_id",
       ({ params: { challenge_id } }) => {
+        console.debug("🥊 Get detailed challange by id");
+
         return this.service.get_challenge_by_id(challenge_id);
       },
       {
@@ -66,6 +78,7 @@ export class ChallengeController {
     .post(
       "/challenge/new",
       ({ userId, body }) => {
+        console.debug("🥊 Create new challenge");
         return this.service.create_challenge(userId, body);
       },
       {
@@ -79,6 +92,7 @@ export class ChallengeController {
     .post(
       "/challenge/:challengeId/invite",
       ({ userId, body, params: { challengeId } }) => {
+        console.debug("🥊 Invite people to challenge");
         return this.service.invite_to_challenge(challengeId, userId, body);
       },
       {
@@ -89,10 +103,38 @@ export class ChallengeController {
         }),
       }
     )
+    .get(
+      "/challenge/pending",
+      ({ userId }) => {
+        console.debug("🥊 Get pending challenges");
+        return this.service.get_pending_challenges(userId);
+      },
+      {
+        beforeHandle: apiMiddleware,
+      }
+    )
+    .post(
+      "/challenge/invite",
+      ({ userId, body: { challengeId, accept } }) => {
+        console.debug("🥊 Accept pending challenge");
+        return this.service.accepted_challenge_invite(
+          userId,
+          challengeId,
+          accept
+        );
+      },
+      {
+        beforeHandle: apiMiddleware,
+        body: t.Object({
+          challengeId: t.Numeric(),
+          accept: t.Boolean(),
+        }),
+      }
+    )
     .put(
       "/challenge",
       (userToken) => {
-        console.log("WIP Update Challenge");
+        console.debug("🥊 WIP change challenge");
       },
       {
         beforeHandle: apiMiddleware,

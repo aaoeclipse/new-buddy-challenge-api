@@ -2,14 +2,14 @@
   "name": "be-buddy-challenge",
   "version": "1.0.50",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "bun test",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
     "@elysiajs/cookie": "^0.8.0",
     "@elysiajs/jwt": "^1.0.2",
     "@prisma/client": "^5.13.0",
-    "elysia": "latest"
+    "elysia": "1.1.7"
   },
   "devDependencies": {
     "bun-types": "latest",

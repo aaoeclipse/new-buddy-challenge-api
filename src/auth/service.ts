@@ -22,12 +22,12 @@ export class AuthService {
     if (!isMatch) throw new Error("Wrong username or password");
 
     // Get the JWT secret from the .env file
-    const token = tokenManager.sign({
+    const token = await tokenManager.sign({
       userId: user.id,
       email: user.email,
     });
 
-    return token;
+    return { token: token };
   };
 
   /**
@@ -36,6 +36,7 @@ export class AuthService {
    * @returns
    */
   public register = async (user: CreateUserDTO) => {
+    user.password = await Bun.password.hash(user.password);
     return this.database.create_user(user);
   };
 

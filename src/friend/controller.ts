@@ -44,6 +44,7 @@ export class FriendController {
     .get(
       "/friends",
       ({ userId }) => {
+        console.debug("🧑‍🤝‍🧑 Get all friends");
         return this.service.getFriends(userId);
       },
       {
@@ -53,6 +54,7 @@ export class FriendController {
     .get(
       "/friends/pending",
       ({ userId }) => {
+        console.debug("🧑‍🤝‍🧑 Get pending friend request");
         return this.service.getFriendRequest(userId);
       },
       {
@@ -62,6 +64,7 @@ export class FriendController {
     .post(
       "/friends",
       ({ userId, body: { friendId } }) => {
+        console.debug("🧑‍🤝‍🧑 Send friend request");
         return this.service.sendFriendRequest(userId, friendId);
       },
       {
@@ -74,6 +77,7 @@ export class FriendController {
     .post(
       "/friends/:id",
       ({ userId, params: { id }, body: { accept } }) => {
+        console.debug("🧑‍🤝‍🧑 Accept/Decline friend request");
         return this.service.acceptFriendRequest(userId, id, accept);
       },
       {

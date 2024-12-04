@@ -21,10 +21,12 @@ export class AuthController {
   }
 
   public authController = new Elysia()
-    .get("/auth", async () => {})
+    .get("/auth", async () => { })
     .post(
       "/register",
       async ({ body }) => {
+        console.debug("🔍 register");
+
         const newUser = body as CreateUserDTO;
         return this.service.register(newUser);
       },
@@ -45,6 +47,7 @@ export class AuthController {
     .post(
       "/login",
       async ({ userToken, body }) => {
+        console.debug("🔍 login");
         return this.service.login(userToken, body.email, body.password);
       },
       {

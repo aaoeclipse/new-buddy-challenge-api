@@ -63,11 +63,36 @@ export class DatabaseManager {
   }
 
   public async get_challenges_by_user(userId: number) {
-    return await this.connection.challenge.findMany({
+    const ownedChallenge = await this.connection.challenge.findMany({
       where: {
         ownerId: userId,
       },
+      include: {
+        people: {
+          select: {
+            userId: true,
+          },
+        },
+      },
     });
+    const challenges = await this.connection.challenge.findMany({
+      where: {
+        people: {
+          some: {
+            userId: userId,
+          },
+        },
+      },
+      include: {
+        people: {
+          select: {
+            userId: true,
+          },
+        },
+      },
+    });
+
+    return [...ownedChallenge, ...challenges];
   }
 
   public create_challenge(userId: number, challenge: CreateChallengeDTO) {
@@ -84,22 +109,24 @@ export class DatabaseManager {
       where: {
         id: challengeId,
       },
-    });
-  }
-
-  public invite_to_challenge(challengeId: number, userIds: number[]) {
-    return this.connection.challenge.update({
-      where: {
-        id: challengeId,
-      },
-      data: {
+      include: {
         people: {
-          createMany: {
-            data: userIds.map((userId) => ({ userId })),
+          select: {
+            userId: true,
           },
         },
       },
     });
+  }
+
+  public async invite_to_challenge(challengeId: number, userIds: number[]) {
+    const createInvite = await this.connection.challengeInvite.createMany({
+      data: userIds.map((userId) => ({
+        challengeId,
+        userId,
+      })),
+    });
+    return createInvite;
   }
 
   public get_friends_from_userid(userId: number) {
@@ -210,6 +237,83 @@ export class DatabaseManager {
     return this.connection.friendRequest.findFirst({
       where: {
         id: requestId,
+      },
+    });
+  }
+
+  public async get_pending_challenges(userId: number) {
+    return await this.connection.challengeInvite.findMany({
+      where: {
+        userId: userId,
+      },
+    });
+  }
+
+  public async accept_challenge(
+    userId: number,
+    challengeId: number,
+    accept: boolean
+  ) {
+    // Check if the challenge exists
+    const challenge = await this.connection.challengeInvite.findFirst({
+      where: {
+        userId: userId,
+        challengeId: challengeId,
+      },
+    });
+    // If challenge doesn't exists then return
+    if (!challenge) {
+      throw error(404, "Challenge not found");
+    }
+
+    // If user did not accept the challenge then just delete the invite of the user
+    if (!accept) {
+      return await this.connection.challengeInvite.delete({
+        where: {
+          challengeId_userId: {
+            challengeId: challengeId,
+            userId: userId,
+          },
+        },
+      });
+    }
+
+    // If the user accepted:
+    // 1. Create a new ChallengeOnUser record
+    // 2. Delete the challenge invite
+
+    await this.connection.challengeOnUser.create({
+      data: {
+        challenge: {
+          connect: {
+            id: challengeId,
+          },
+        },
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
+    });
+
+    return await this.connection.challengeInvite.delete({
+      where: {
+        challengeId_userId: {
+          challengeId: challengeId,
+          userId: userId,
+        },
+      },
+    });
+  }
+
+  public get_latest_challenge_by_user(userId: number) {
+    return this.connection.challenge.findFirst({
+      where: {
+        ownerId: userId,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
   }
